@@ -1,0 +1,98 @@
+# Project Plan & Team Contract
+## Youth Justice Case Management System — Assessment 4
+### Group 8 | Version 3.0
+
+*Updated from Assessment 1 and Assessment 2 versions.*
+
+---
+
+## 1. What changed in Assessment 4
+
+| Feature | Assessment 2 | Assessment 4 |
+|---------|-------------|-------------|
+| Business logic location | Views and model methods | Service layer (`cases/services/`) |
+| Exception handling | Generic Python exceptions | Named domain exceptions (ADR-007) |
+| Testing | No tests | 3 test files — models, services, views |
+| YoungPerson model | Single address field | Structured address, email, education_status, is_minor, indexes |
+| Transaction safety | No atomic operations | `@transaction.atomic` on enrolment |
+| ADR entries | 6 entries | 8 entries — ADR-007 and ADR-008 added |
+
+---
+
+## 2. Team Members and Roles
+
+| Name | Role | Assessment 4 Files |
+|------|------|--------------------|
+| **Sakar** | Project Coordinator | `ADR.md` (all 8 entries), `PROJECT_PLAN.md`, `SUPPLEMENTARY/DJANGO_PHILOSOPHIES.md` |
+| **Samir** | Research & Backend Lead | `cases/models.py`, `cases/admin.py`, `cases/services/case_service.py`, `cases/tests/test_models.py`, `cases/tests/test_services.py`, `SUPPLEMENTARY/ERD_v2.md` |
+| **Aryan** | UI/UX Designer | All HTML templates, `SUPPLEMENTARY/CLASS_DIAGRAM_v2.md` |
+| **Rohan** | Technical Lead | `cases/views.py`, `cases/urls.py`, `core/settings.py`, `core/urls.py`, `cases/tests/test_views.py`, deployment |
+
+---
+
+## 3. Team Contract (unchanged from Assessment 2)
+
+- Equal grade distribution when all members contribute as agreed
+- Microsoft Teams for official communication
+- GitHub commit history as evidence of contribution
+- All work via feature branches with peer-reviewed pull requests
+- AI tools permitted for scaffolding; all code explainable at viva
+- ADR entries must be committed before or alongside the code they document
+
+---
+
+## 4. Assessment 4 Checkpoint Plan
+
+### Checkpoint 1 — 08 May 2026
+- [x] YoungPerson model improvements committed (Samir)
+- [x] ADR-007 committed by Sakar before service layer written
+- [x] Service layer skeleton (Samir)
+- [x] Each member has at least one GitHub commit
+
+### Checkpoint 2 — 15 May 2026
+- [x] `CaseService` complete with all methods (Samir)
+- [x] Custom exceptions in `models.py` (Samir)
+- [x] ADR-008 committed by Sakar before tests written
+- [x] `test_models.py` and `test_services.py` passing (Samir)
+
+### Checkpoint 3 — 22 May 2026
+- [x] `test_views.py` passing (Rohan)
+- [x] Views updated to call service layer (Rohan)
+- [x] Templates updated for new model fields (Aryan)
+- [x] `SUPPLEMENTARY/` updated (Aryan, Samir)
+- [x] All tests passing: `python manage.py test cases.tests`
+
+### Final Submission — 28 May 2026 at 2:00 PM ACST
+- [x] GitHub URL submitted via Learnline
+- [x] ADR.md with 8 entries (ADR-001 through ADR-008)
+- [x] Three test files all passing
+- [x] App runnable from fresh clone
+- [x] All 4 members have commits
+
+---
+
+## 5. Running the App
+
+```bash
+cd youth_justice
+python -m venv venv
+venv\Scripts\activate        # Windows
+source venv/bin/activate     # Mac/Linux
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+## 6. Running the Tests
+
+```bash
+python manage.py test cases.tests
+python manage.py test cases.tests.test_models
+python manage.py test cases.tests.test_services
+python manage.py test cases.tests.test_views
+```
+
+---
+
+*Group 8: Sakar · Samir · Aryan · Rohan | Assessment 4 | Due 28 May 2026*
