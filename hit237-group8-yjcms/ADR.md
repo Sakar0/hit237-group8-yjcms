@@ -211,6 +211,16 @@ When two `Count()` annotates each require a JOIN, the JOINs multiply rows.
 Caseworker with 3 clients × 5 cases = 15 rows — count would be 15 without distinct.
 `distinct=True` counts unique values independently per annotation.
 
+**Assessment 4 QuerySet justification:**
+- `select_related()` is chosen only for ForeignKey / OneToOne traversals because it
+  performs a SQL JOIN and is efficient for single-row relationships.
+- `prefetch_related()` is chosen for ManyToMany and reverse ForeignKey traversal
+  because it avoids duplicate rows and loads related objects in a second query.
+- Conditional `annotate(..., filter=Q(...))` limits aggregates to relevant rows,
+  making counts correct and performant.
+- `distinct=True` prevents inflated annotation counts when multiple JOIN paths
+  would otherwise multiply the result set.
+
 **`Q` objects** — OR-based search in one query.
 Chained `.filter()` produces AND — a name search would only match when
 both fields contain the term. `Q(first__icontains=q) | Q(last__icontains=q)`
